@@ -1,0 +1,282 @@
+/* ==========================================================================
+   QuangHungHeart - Gọn Gàng, Siêu Mượt, Lãng Mạn & Không Lag
+   ========================================================================== */
+
+:root {
+  --bg-dark: #07030d;
+  --pink-neon: #ff2a85;
+  --pink-soft: #ff75a0;
+  --purple-glow: #a855f7;
+  --text-primary: #f8fafc;
+  --text-muted: #cbd5e1;
+  --glass-bg: rgba(18, 10, 28, 0.65);
+  --glass-border: rgba(255, 105, 180, 0.25);
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-code: 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  user-select: none;
+}
+
+/* Canvas toàn màn hình phía sau */
+#heartCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+/* Nút điều khiển nhạc */
+.audio-toggle {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(22, 12, 34, 0.75);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.audio-toggle:hover {
+  border-color: var(--pink-neon);
+  box-shadow: 0 0 15px rgba(255, 42, 133, 0.4);
+  transform: translateY(-1px);
+}
+
+.music-disc {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.music-disc.rotating {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Khung nội dung chính */
+.main-container {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 500px;
+  pointer-events: none; /* Cho phép click xuyên thấu canvas xung quanh */
+}
+
+.heart-card {
+  pointer-events: auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 42, 133, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeInCard 1s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heart-card:hover {
+  border-color: rgba(255, 105, 180, 0.45);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 42, 133, 0.2);
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Badge trên đầu card */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 42, 133, 0.12);
+  border: 1px solid rgba(255, 42, 133, 0.3);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: var(--pink-soft);
+  margin-bottom: 14px;
+}
+
+.badge .dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10b981;
+}
+
+/* Tiêu đề */
+.card-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.gradient-name {
+  background: linear-gradient(135deg, #ff2a85 0%, #ff85a2 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Đoạn văn mô tả */
+.card-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+/* Hộp code IT tình yêu */
+.code-box {
+  background: rgba(10, 5, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  text-align: left;
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.c-circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.c-circle.red { background: #ff5f56; }
+.c-circle.yellow { background: #ffbd2e; }
+.c-circle.green { background: #27c93f; }
+
+.code-filename {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-left: 6px;
+}
+
+.code-box pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.code-box code {
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+.c-keyword { color: #f43f5e; font-weight: 600; }
+.c-func { color: #38bdf8; }
+.c-str { color: #facc15; }
+.c-param { color: #c084fc; }
+.c-bool { color: #4ade80; }
+
+.card-footer-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.card-footer-text code {
+  background: rgba(255, 42, 133, 0.15);
+  color: #ff75a0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-code);
+}
+
+/* Nút bấm thả tim */
+.btn-primary {
+  background: linear-gradient(135deg, #ff2a85 0%, #d946ef 100%);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 42, 133, 0.4);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 28px rgba(255, 42, 133, 0.65);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Tối ưu màn hình điện thoại */
+@media (max-width: 480px) {
+  .heart-card {
+    padding: 22px 18px;
+  }
+  .card-title {
+    font-size: 1.4rem;
+  }
+  .card-desc {
+    font-size: 0.88rem;
+  }
+  .code-box {
+    font-size: 0.78rem;
+  }
+}

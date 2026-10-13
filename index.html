@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gửi Lê Quang Hùng | Trái Tim Dành Cho Hùng 💖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Canvas nền: Trái tim neon siêu mượt (60 FPS) -->
+  <canvas id="heartCanvas"></canvas>
+
+  <!-- Nút điều khiển nhạc (Tự động bật) -->
+  <button id="audioBtn" class="audio-toggle" title="Bật / Tắt nhạc">
+    <span class="music-disc rotating" id="musicIcon">🎵</span>
+    <span class="music-text" id="musicStatus">Nhạc: Đang phát</span>
+  </button>
+
+  <!-- Hộp thư tình cảm trung tâm -->
+  <main class="main-container">
+    <div class="heart-card" id="heartCard">
+      <div class="badge">
+        <span class="dot"></span>
+        <span>SPECIAL FOR: <strong>LÊ QUANG HÙNG</strong></span>
+      </div>
+
+      <h1 class="card-title">
+        Gửi <span class="gradient-name">Lê Quang Hùng</span> 💕
+      </h1>
+
+      <p class="card-desc">
+        Giữa hàng tỷ dòng lệnh phức tạp của vũ trụ, tui có thể debug hàng ngàn lỗi thuật toán,
+        nhưng lại bất lực trước nhịp đập rộn ràng mỗi khi nghĩ đến đồng chí Hùng.
+      </p>
+
+      <div class="code-box">
+        <div class="code-bar">
+          <span class="c-circle red"></span>
+          <span class="c-circle yellow"></span>
+          <span class="c-circle green"></span>
+          <span class="code-filename">forever_love.ts</span>
+        </div>
+        <pre><code><span class="c-keyword">while</span> (heart.isBeating) {
+    <span class="c-func">love</span>(<span class="c-str">"Lê Quang Hùng"</span>);
+    <span class="c-keyword">await</span> <span class="c-func">holdHands</span>({ <span class="c-param">forever</span>: <span class="c-bool">true</span> });
+}</code></pre>
+      </div>
+
+      <p class="card-footer-text">
+        Hệ điều hành của tui từ nay cấp đặc quyền cao nhất <code>sudo root</code> cho Hùng:
+        toàn quyền quản trị niềm vui, nụ cười và cả trái tim tui! ✨
+      </p>
+
+      <div class="card-actions">
+        <button id="sendLoveBtn" class="btn-primary">
+          <span>Bắn Tim Cho Hùng 💖</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Âm thanh nền tùy chọn nếu có file local -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
